@@ -583,8 +583,8 @@ public final class NoFallCheck implements Check {
 
     @Override
     public void reload() {
-        // Reload config-driven flags if available
         if (configs != null) {
+            this.enabled = configs.checks().getBoolean("checks.NOFALL.enabled", true);
             this.debugLogs = configs.checks().getBoolean("checks.NOFALL.params.debug_logs", false);
         }
     }
