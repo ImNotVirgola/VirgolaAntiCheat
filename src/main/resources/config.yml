@@ -1,9 +1,7 @@
-# VirgolaAntiCheat - main configuration
+# VirgolaAntiCheat - Impostazioni generali
+# I tuoi valori personalizzati vengono mantenuti durante gli aggiornamenti.
 
 prefix: "&d&lVirgolaAC &8» &7"
-
-debug:
-  console: true
 
 alerts:
   # Permission that receives alerts in-game
@@ -39,19 +37,15 @@ discord:
     color: 16711680
 
 lag-compensation:
-  # Ping is used as a multiplier for timings.
-  # 1.0 means neutral.
+  # Adatta la tolleranza alle condizioni di rete.
+  # I valori predefiniti sono consigliati.
   ping_multiplier:
     base: 1.0
     per_100ms: 0.15
-  # TPS is used as a multiplier for timings.
+  # Adatta la tolleranza quando il server rallenta.
   tps_multiplier:
     base: 1.0
     per_tps_below_20: 0.20
-
-mitigation:
-  enabled: false
-  # Future: soft mitigations like hitbox clamp, place delay, etc.
 
 gui:
   title: "&dVirgolaAntiCheat"
