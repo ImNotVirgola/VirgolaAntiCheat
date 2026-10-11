@@ -1,0 +1,167 @@
+
+# Command specific messages (alternate place for command help if preferred)
+help:
+  commands:
+    help:
+      usage: "/ac help [command]"
+      description: "Shows the command list or detailed info."
+      details:
+        - "No arg: shows all commands"
+        - "With arg: shows info about the command"
+      examples:
+        - "/ac help"
+        - "/ac help freeze"
+
+    alerts:
+      usage: "/ac alerts"
+      description: "Toggle receiving alerts."
+      details:
+        - "When enabled: you receive notifications for each violation"
+        - "When disabled: you won't receive notifications"
+      examples:
+        - "/ac alerts"
+
+    info:
+      usage: "/ac info <player>"
+      description: "Shows a player's violations."
+      details:
+        - "Shows each check with its VL"
+        - "Also shows ping and gamemode"
+      examples:
+        - "/ac info Steve"
+
+    list:
+      usage: "/ac list"
+      description: "Lists online players with violations."
+      details:
+        - "Shows players sorted by VL"
+        - "Colors: red (>=10), yellow (>=5), gray (<5)"
+      examples:
+        - "/ac list"
+
+    top:
+      usage: "/ac top"
+      description: "Top 10 players with highest violations."
+      details:
+        - "Shows top 10 suspicious players"
+        - "Useful to identify cheaters"
+      examples:
+        - "/ac top"
+
+    freeze:
+      usage: "/ac freeze <player>"
+      description: "Freeze a suspicious player."
+      details:
+        - "The player cannot: move, attack, use commands"
+        - "The player can only: look around, use /msg and /r"
+        - "If they disconnect, staff is notified"
+      examples:
+        - "/ac freeze Steve"
+
+    unfreeze:
+      usage: "/ac unfreeze <player>"
+      description: "Unfreeze a player."
+      details:
+        - "The player can resume playing normally"
+      examples:
+        - "/ac unfreeze Steve"
+
+    spectate:
+      usage: "/ac spectate <player>"
+      description: "Enter spectator mode."
+      details:
+        - "Enter invisible spectator mode"
+        - "Automatically follow the player"
+        - "Position and gamemode are saved"
+      examples:
+        - "/ac spectate Steve"
+        - "/ac spec Steve"
+
+    unspectate:
+      usage: "/ac unspectate"
+      description: "Exit spectator mode."
+      details:
+        - "Return to your original position"
+        - "Your gamemode is restored"
+      examples:
+        - "/ac unspectate"
+        - "/ac unspec"
+
+    tp:
+      usage: "/ac tp <player>"
+      description: "Teleport to a player."
+      details:
+        - "Useful to quickly reach a suspect"
+      examples:
+        - "/ac tp Steve"
+        - "/ac goto Steve"
+
+    broadcast:
+      usage: "/ac broadcast <message>"
+      description: "Send a message to online staff."
+      details:
+        - "Only users with permission virgolaac.staff see it"
+        - "Useful for internal communications"
+      examples:
+        - "/ac broadcast Check Steve"
+        - "/ac bc Suspicious at spawn"
+
+    panel:
+      usage: "/ac panel"
+      description: "Open the management GUI panel."
+      details:
+        - "View and toggle checks"
+        - "Show server stats"
+        - "TPS, RAM, online players, active checks"
+      examples:
+        - "/ac panel"
+        - "/ac gui"
+
+    reset:
+      usage: "/ac reset <player|all>"
+      description: "Reset violations."
+      details:
+        - "With player name: reset only that player"
+        - "With 'all': reset all players"
+      examples:
+        - "/ac reset Steve"
+        - "/ac reset all"
+
+    verbose:
+      usage: "/ac verbose"
+      description: "Toggle verbose/debug mode."
+      details:
+        - "Shows extra information about detections"
+        - "Useful for debugging and testing"
+      examples:
+        - "/ac verbose"
+        - "/ac debug"
+
+    kick:
+      usage: "/ac kick <player> [reason]"
+      description: "Kick a player from the server."
+      details:
+        - "The player sees the reason on their screen"
+        - "Staff is notified"
+      examples:
+        - "/ac kick Steve"
+        - "/ac kick Steve Speed Hack"
+
+    ban:
+      usage: "/ac ban <player> [reason]"
+      description: "Permanently ban a player."
+      details:
+        - "Uses Bukkit's ban system"
+        - "Staff is notified"
+      examples:
+        - "/ac ban Steve"
+        - "/ac ban Steve Fly Hack"
+
+    reload:
+      usage: "/ac reload"
+      description: "Reload configurations."
+      details:
+        - "Reloads: config.yml, checks.yml, messages.yml"
+        - "Does not require a server restart"
+      examples:
+        - "/ac reload"

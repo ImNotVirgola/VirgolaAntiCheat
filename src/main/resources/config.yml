@@ -1,0 +1,57 @@
+# VirgolaAntiCheat - main configuration
+
+prefix: "&d&lVirgolaAC &8» &7"
+
+debug:
+  console: true
+
+alerts:
+  # Permission that receives alerts in-game
+  permission: "virgolaac.alerts"
+  # Also log alerts to console
+  console: true
+
+# ---------------------------------------------------------------
+#                         DISCORD WEBHOOK
+# ---------------------------------------------------------------
+discord:
+  # Enable Discord notifications
+  enabled: false
+  # The full Discord webhook URL to post messages to
+  webhook-url: ""
+  # Optional: list of webhook URLs (used if present). Example:
+  # webhooks:
+  #   - "https://discord.com/api/webhooks/ID/TOKEN"
+  webhooks: []
+  # Optional: per-check webhooks mapping
+  # check-webhooks:
+  #   Speed:
+  #     - "https://discord.com/api/webhooks/..."
+  check-webhooks: {}
+  # Username override for the webhook (optional)
+  username: "VirgolaAC"
+  # Avatar URL for the webhook (optional)
+  avatar-url: ""
+  # Embed (rich message) settings
+  embed:
+    enabled: true
+    # Decimal color for the embed (e.g., 16711680 = red)
+    color: 16711680
+
+lag-compensation:
+  # Ping is used as a multiplier for timings.
+  # 1.0 means neutral.
+  ping_multiplier:
+    base: 1.0
+    per_100ms: 0.15
+  # TPS is used as a multiplier for timings.
+  tps_multiplier:
+    base: 1.0
+    per_tps_below_20: 0.20
+
+mitigation:
+  enabled: false
+  # Future: soft mitigations like hitbox clamp, place delay, etc.
+
+gui:
+  title: "&dVirgolaAntiCheat"

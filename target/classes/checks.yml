@@ -1,0 +1,287 @@
+# VirgolaAntiCheat - Checks Configuration
+# All checks use buffer-based detection with lag compensation
+
+checks:
+  # ============================================
+  # SPEED - Ground Speed Hack Detection
+  # ============================================
+  SPEED:
+    enabled: true
+    params:
+      # --- existing / core ---
+      threshold: 4.5
+      alert_cooldown_ms: 1500
+      post_flag_reduce: 2.5
+
+      min_ground_ticks: 3
+      min_bps: 0.5
+      min_max_bps: 1.5
+      hard_cap_bps: 20.0
+
+      # Buffer decay
+      decay_ok: 0.25
+      decay_air: 0.15
+      decay_still: 0.10
+      decay_slight_over: 0.15
+
+      # Weights
+      weight_borderline: 0.25
+      weight_low: 0.50
+      weight_medium: 0.80
+      weight_high: 1.20
+
+      # Sneak grace (spam / momentum)
+      sneak_grace_ms: 800
+
+      # --- SOUL-SPECIFIC IMPROVEMENTS ---
+      # Tight tolerance on soul blocks (to catch small-margin hacks on SS3)
+      soul_recent_ms: 250
+      ratio_ignore: 1.10
+      ratio_borderline: 1.15
+      ratio_ignore_soul: 1.07
+      ratio_borderline_soul: 1.12
+
+      # Grace when equipping/unequipping Soul Speed boots while moving on soul sand/soil
+      soul_speed_change_grace_ms: 650
+      decay_soul_speed_change: 1.25
+
+      # Existing soul/ice/bounce/damage modifiers you already reference (keep/adjust as needed)
+      soul_grace_ms: 400
+      soul_no_enchant_sneak_mult: 0.7
+
+      ice_mult: 1.2
+      packed_ice_mult: 1.3
+      blue_ice_mult: 1.4
+      ice_grace_ms: 500
+      ice_grace_mult: 1.2
+
+      bounce_grace_ms: 800
+      bounce_grace_mult: 1.3
+
+      cobweb_mult: 0.15
+      berry_mult: 0.25
+
+      block_change_grace_ms: 600
+      block_transition_mult: 1.25
+
+      damage_grace_ms: 600
+      damage_grace_mult: 1.4
+
+  # ============================================
+  # FLY - Flight Detection (Air + Water)
+  # ============================================
+  FLY:
+    enabled: true
+    params:
+      # Air fly detection
+      air_weight: 1.0
+      air_threshold: 4.0
+      stable_air_min: 6
+      
+      # Water fly detection
+      water_weight: 0.8
+      water_ascend_weight: 1.2
+      water_threshold: 5.0
+      water_stable_min: 10
+      
+      # General
+      alert_cooldown_ms: 1000
+      post_flag_reduce: 2.0
+
+  # ============================================
+  # JESUS - Water Walking Detection
+  # ============================================
+  JESUS:
+    enabled: true
+    params:
+      # Detection
+      min_flat_ticks: 8
+      weight: 1.2
+      threshold: 3.0
+      
+      # Alert settings
+      alert_cooldown_ms: 1200
+      post_flag_reduce: 1.5
+
+  # ============================================
+  # SCAFFOLD - Scaffold/Tower Detection
+  # ============================================
+  SCAFFOLD:
+    enabled: true
+    params:
+      max_angle: 75.0
+      min_pitch: 40.0
+      min_pitch_other_face: 20.0
+      min_violations: 2
+      alert_cooldown_ms: 1000
+
+  # ============================================
+  # NOFALL - NoFall Hack Detection (Damage Event Based)
+  # ============================================
+  # Detection: Tracks real fall distance via packets, then verifies
+  # that EntityDamageEvent(FALL) is received when player lands.
+  # If no damage event within grace period -> NoFall hack
+  NOFALL:
+    enabled: true
+    params:
+      # Minimum fall distance that should cause damage (vanilla = 3 blocks)
+      min_fall_blocks: 3.5
+      
+      # Grace period to receive fall damage event after landing (ms)
+      # Set higher if lag causes delayed damage events
+      damage_grace_ms: 200
+      
+      # Grace period after Mace hit during fall (ms)
+      mace_grace_ms: 2000
+      
+      # Alert cooldown (ms)
+      alert_cooldown_ms: 1500
+      
+      # Minimum fall distance to consider dripstone damage (blocks)
+      # Small falls onto pointed dripstone can still deal damage (default 1.2)
+      min_dripstone_fall: 1.2
+      
+      # Tolerance ratio when comparing received damage to expected damage
+      # (e.g. 0.8 means received >= expected * 0.8 satisfies expectation)
+      damage_tolerance: 0.8
+      # Allow small slack when comparing fall distance to min dripstone threshold
+      # This helps account for packet rounding and measurement differences (default 0.15)
+      dripstone_slack: 0.15
+      # Enable debug logs for NOFALL (set true to print diagnostic logs)
+      debug_logs: false
+
+  # ============================================
+  # BADPACKETS - Invalid Packet Detection
+  # ============================================
+  BADPACKETS:
+    enabled: true
+    params:
+      threshold: 2.0
+      weight: 1.0
+      alert_cooldown_ms: 1000
+      post_flag_reduce: 1.0
+
+  # ============================================
+  # KILLAURA - Combat Hack Detection
+  # ============================================
+  # Sub-checks: Reach, Angle, NoSwing, GCD, MultiAura, Pattern
+  # Each sub-check has its own threshold and can be toggled
+  KILLAURA:
+    enabled: true
+    
+    # Global settings
+    alert_cooldown_ms: 1000
+    post_flag_reduce: 2.0
+    
+    sub_checks:
+      # ────────────────────────────────────────
+      # REACH - Hit distance beyond vanilla 3.0
+      # ────────────────────────────────────────
+      reach:
+        enabled: true
+        # Vanilla reach is 3.0 blocks
+        max_distance: 3.0
+        # Creative mode reach (default 5.0 blocks)
+        creative_max_distance: 5.0
+        # Extra distance allowed per lag multiplier
+        lag_buffer: 0.3
+        # Modes to ignore this sub-check for (optional list of GameMode names)
+        # ignore_in_modes: [SPECTATOR]
+        # Buffer settings
+        weight: 1.0
+        threshold: 3.0
+        decay: 0.5
+      
+      # ────────────────────────────────────────
+      # ANGLE - Hit while not looking at target
+      # ────────────────────────────────────────
+      angle:
+        enabled: true
+        # Max angle (degrees) between look direction and target
+        max_angle: 60.0
+        # Extra angle allowed per lag multiplier
+        lag_buffer: 10.0
+        # Buffer settings
+        weight: 1.5
+        threshold: 4.0
+        decay: 0.4
+      
+      # ────────────────────────────────────────
+      # NOSWING - Attack without swing animation
+      # ────────────────────────────────────────
+      noswing:
+        enabled: true
+        # Max ms between swing and hit
+        max_delay_ms: 100
+        # Buffer settings
+        weight: 2.0
+        threshold: 4.0
+        decay: 1.0
+      
+      # ────────────────────────────────────────
+      # GCD - Invalid rotation sensitivity
+      # Only analyzed during active combat (3s after hit)
+      # ────────────────────────────────────────
+      gcd:
+        enabled: true
+        # Sample analysis (more samples = fewer false positives)
+        sample_size: 30
+        min_samples: 20
+        # GCD thresholds - very low GCD + low stdDev = aimbot
+        min_valid_gcd: 0.005
+        max_std_dev: 0.0005
+        # Buffer settings (conservative to avoid false positives)
+        weight: 1.0
+        threshold: 6.0
+        decay: 0.5
+      
+      # ────────────────────────────────────────
+      # MULTIAURA - Multiple targets too fast
+      # ────────────────────────────────────────
+      multiaura:
+        enabled: true
+        # Time window to count targets (ms)
+        window_ms: 500
+        # Max different targets in window (sword cleave = 2)
+        max_targets: 2
+        # Buffer settings
+        weight: 2.0
+        threshold: 3.0
+      
+      # ────────────────────────────────────────
+      # PATTERN - Robotic rotation consistency
+      # ────────────────────────────────────────
+      pattern:
+        enabled: true
+        # Minimum samples for analysis
+        min_samples: 10
+        # Minimum variance (humans have natural jitter)
+        min_variance: 0.5
+        # Buffer settings
+        weight: 1.0
+        threshold: 5.0
+        decay: 0.2
+
+    # Mode-specific overrides for Killaura behavior.
+    # Example: CREATIVE can relax some thresholds or increase reach.
+    # Format: checks.KILLAURA.mode_overrides.<GAMEMODE>.sub_checks.<subcheck>.<key>
+    mode_overrides:
+      CREATIVE:
+        sub_checks:
+          reach:
+            # Keep normal base, but increase creative reach and lag buffer
+            creative_max_distance: 5.0
+            lag_buffer: 0.35
+            threshold: 4.0
+          angle:
+            max_angle: 65.0
+            lag_buffer: 12.0
+          noswing:
+            max_delay_ms: 150
+          gcd:
+            min_valid_gcd: 0.006
+            max_std_dev: 0.001
+          multiaura:
+            max_targets: 3
+          pattern:
+            min_variance: 0.6

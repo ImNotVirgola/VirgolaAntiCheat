@@ -1,0 +1,45 @@
+name: VirgolaAntiCheat
+version: ${project.version}
+main: it.virgola.anticheat.VirgolaAntiCheat
+api-version: '1.21'
+author: Virgola
+
+# Hard-depend: we require PacketEvents
+depend: [packetevents]
+
+commands:
+  ac:
+    description: VirgolaAntiCheat main command
+    usage: /ac <help|panel|alerts|info|freeze|spectate|top|list|kick|ban|reload>
+    permission: virgolaac.alerts
+
+permissions:
+  virgolaac.*:
+    description: Tutti i permessi di VirgolaAntiCheat
+    default: op
+    children:
+      virgolaac.admin: true
+      virgolaac.staff: true
+      virgolaac.alerts: true
+      virgolaac.bypass: true
+  
+  virgolaac.admin:
+    description: Permessi amministrativi (reload, reset, kick, ban, verbose, panel)
+    default: op
+    children:
+      virgolaac.staff: true
+      virgolaac.alerts: true
+  
+  virgolaac.staff:
+    description: Permessi staff (info, freeze, spectate, tp, top, list, broadcast)
+    default: op
+    children:
+      virgolaac.alerts: true
+  
+  virgolaac.alerts:
+    description: Ricevi gli alert dell'anticheat
+    default: op
+  
+  virgolaac.bypass:
+    description: Bypass tutti i check dell'anticheat
+    default: false

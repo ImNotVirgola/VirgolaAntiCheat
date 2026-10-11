@@ -1,0 +1,591 @@
+# ================================================================
+#                      VIRGOLA ANTICHEAT - MESSAGES
+#                  All messages are customizable below
+# ================================================================
+# Available placeholders:
+#   {prefix}   - Plugin prefix (from config.yml)
+#   {player}   - Player name
+#   {staff}    - Staff member name
+#   {check}    - Check name
+#   {vl}       - Violation level
+#   {reason}   - Kick/ban reason
+#   {message}  - Broadcast message
+#   {state}    - ON/OFF state
+#   {ping}     - Player ping
+#   {gamemode} - Player gamemode
+
+# ---------------------------------------------------------------
+#                         GENERAL MESSAGES
+# ---------------------------------------------------------------
+general:
+  no-permission: "{prefix}&cYou do not have permission."
+  only-ingame: "{prefix}&cThis command can only be used in-game."
+  unknown-command: "{prefix}&7Unknown command. Use &d/ac help"
+  player-not-found: "{prefix}&cPlayer &f{player} &cnot found."
+  reloaded: "{prefix}&aConfiguration reloaded successfully."
+
+# ---------------------------------------------------------------
+#                         COMMAND USAGE MESSAGES
+# ---------------------------------------------------------------
+usage:
+  info: "{prefix}&7Usage: &f/ac info &8<&fplayer&8>"
+  reset: "{prefix}&7Usage: &f/ac reset &8<&fplayer&7|&fall&8>"
+  kick: "{prefix}&7Usage: &f/ac kick &8<&fplayer&8> &7[reason]"
+  ban: "{prefix}&7Usage: &f/ac ban &8<&fplayer&8> &7[reason]"
+  freeze: "{prefix}&7Usage: &f/ac freeze &8<&fplayer&8>"
+  unfreeze: "{prefix}&7Usage: &f/ac unfreeze &8<&fplayer&8>"
+  spectate: "{prefix}&7Usage: &f/ac spectate &8<&fplayer&8>"
+  tp: "{prefix}&7Usage: &f/ac tp &8<&fplayer&8>"
+  broadcast: "{prefix}&7Usage: &f/ac broadcast &8<&fmessage&8>"
+# ---------------------------------------------------------------
+#                         TOGGLE COMMANDS
+# ---------------------------------------------------------------
+toggle:
+  alerts: "{prefix}Alerts &8» {state}"
+  verbose: "{prefix}Verbose &8» {state}"
+  check: "{prefix}&f{check} &8» {state}"
+  state-on: "&aON"
+  state-off: "&cOFF"
+
+# ---------------------------------------------------------------
+#                         VIOLATIONS
+# ---------------------------------------------------------------
+violations:
+  reset-player: "{prefix}&aVL reset &7for &f{player}"
+  reset-all: "{prefix}&aVL reset &7for &fall players"
+  unknown-check: "{prefix}&cCheck &f{check} &cnot found."
+
+# ---------------------------------------------------------------
+#                         KICK & BAN
+# ---------------------------------------------------------------
+punishment:
+  kicked: "{prefix}&f{player} &7was kicked &8• &c{reason}"
+  kick-broadcast: "{prefix}&f{staff} &8➤ &7kicked &f{player} &8• &c{reason}"
+  banned: "{prefix}&f{player} &7was banned &8• &c{reason}"
+  ban-broadcast: "{prefix}&f{staff} &8➤ &7banned &f{player} &8• &c{reason}"
+  default-reason: "Cheating"
+
+  # Kick screen (multiline using |)
+  kick-screen: |
+
+    &c&l⚠ DISCONNECTED
+
+    &7You have been &ckicked &7from the server.
+    &7Reason: &f{reason}
+
+
+  # Ban screen (multiline using |)
+  ban-screen: |
+
+    &4&l✖ BANNED
+
+    &7You have been &4permanently banned&7.
+    &7Reason: &f{reason}
+
+
+# ---------------------------------------------------------------
+#                         FREEZE SYSTEM
+# ---------------------------------------------------------------
+freeze:
+  frozen: "{prefix}&f{player} &8» &efrozen"
+  unfrozen: "{prefix}&f{player} &8» &aunfrozen"
+  broadcast: "{prefix}&f{staff} &7has frozen &f{player}"
+  already-frozen: "{prefix}&f{player} &7is already &efrozen&7."
+  not-frozen: "{prefix}&f{player} &7is not frozen."
+
+  # Message shown to frozen player
+  frozen-screen: |
+
+    &c&l❄ FROZEN
+
+    &7You have been stopped by &fstaff&7.
+    &7Please wait for &instrunctions&7 and do not move.
+
+    &8&oDisconnecting = automatic ban
+
+
+  # Message shown when player is unfrozen
+  unfrozen-screen: |
+
+    &a&l✓ UNFROZEN
+
+    &7You can now resume playing &anormally&7.
+
+
+# ---------------------------------------------------------------
+#                         SPECTATE SYSTEM
+# ---------------------------------------------------------------
+spectate:
+  start: "{prefix}&7Spectating &f{player} &8• &7use &d/ac unspec &7to exit"
+  stop: "{prefix}&aSpectate ended &7• position restored"
+  cannot-self: "{prefix}&7You cannot spectate &fyourself&7."
+  not-spectating: "{prefix}&7You are not spectating anyone."
+
+
+# ---------------------------------------------------------------
+#                         TELEPORT
+# ---------------------------------------------------------------
+teleport:
+  success: "{prefix}&aTeleported &7to &f{player}"
+
+
+# ---------------------------------------------------------------
+#                         STAFF BROADCAST
+# ---------------------------------------------------------------
+staff:
+  broadcast-format: "&8[&d&lSTAFF&8] &f{staff}&8: &7{message}"
+
+
+# ---------------------------------------------------------------
+#                         PLAYER INFO (/ac info)
+# ---------------------------------------------------------------
+info:
+  header: "\n&d&l─── &f&l{player} &d&l───"
+  status-line: "&7Ping: {ping_color}{ping}ms &8• &7Mode: &f{gamemode}"
+  no-violations: "  &7No violations &a✔"
+  violation-line: "  &8▸ &7{check} &8• {vl_color}{vl}"
+  total-line: "  &7Total VL: {total_color}{total}"
+  footer: "&d&l───────────────────\n"
+  # Dynamic colors for ping
+  ping-good: "&a"      # < 80ms
+  ping-medium: "&e"    # < 150ms
+  ping-bad: "&c"       # >= 150ms
+  # Dynamic colors for VL
+  vl-low: "&7"         # < 5
+  vl-medium: "&e"      # < 10
+  vl-high: "&c&l"      # >= 10
+  total-low: "&f"      # < 10
+  total-medium: "&e"   # < 20
+  total-high: "&c&l"   # >= 20
+
+
+# ---------------------------------------------------------------
+#                         PLAYER LIST (/ac list)
+# ---------------------------------------------------------------
+list:
+  header: "\n&d&l─── &f&lSuspicious Players &d&l───"
+  player-line: "  &8▸ &f{player} &8• &7VL: {vl_color}{vl}"
+  empty: "  &7No suspicious players &a✔"
+  footer: "&d&l──────────────────────\n"
+
+
+# ---------------------------------------------------------------
+#                         TOP VIOLATIONS (/ac top)
+# ---------------------------------------------------------------
+top:
+  header: "\n&d&l─── &f&lTop 10 Violations &d&l───"
+  player-line: "  {medal} &f#{rank} &7{player} &8• &7VL: {vl_color}{vl}"
+  empty: "  &7No violations recorded &a✔"
+  footer: "&d&l────────────────────────\n"
+  # Medals for positions
+  medal-1: "&c❤"
+  medal-2: "&6●"
+  medal-3: "&e●"
+  medal-other: "&7○"
+
+
+# ---------------------------------------------------------------
+#                         ALERTS
+# ---------------------------------------------------------------
+alerts:
+  format: "&8[&c&l!&8] &f{player} &8» &e{check} &7(&c+{vl}&7) &8• &7{info}"
+  # Format used when sending alerts to a Discord webhook. Use placeholders: {player}, {check}, {vl}, {info}
+  # Markdown is supported by Discord (bold, code, etc.). If empty, a default format will be used.
+
+
+# ---------------------------------------------------------------
+#                         HELP SYSTEM
+# ---------------------------------------------------------------
+help:
+  # Header and footer for help list
+  header: "\n&d&l─── &f&lVirgolaAC &d&lHelp &d&l───"
+  subtitle: "&8Hover: &7description &8• &8Click: &7details"
+  footer: "&d&l────────────────────────\n"
+  
+  # Command detail page
+  command-header: "\n&d&l─── &f&l/ac {command} &d&l───"
+  command-footer: "&d&l─────────────────────\n"
+  back-button: "&8[&d◀ &7Back&8]"
+  back-hover: "&7Return to command list"
+  
+  # Detail sections
+  section-usage: "&d▸ &7Usage"
+  section-permission: "&d▸ &7Permission"
+  section-description: "&d▸ &7Description"
+  section-details: "&d▸ &7Details"
+  section-examples: "&d▸ &7Examples"
+  detail-bullet: "  &8• &7"
+  example-color: "&a"
+  example-hover: "&7Click to copy"
+  
+  # Command not found
+  not-found: "{prefix}&7Command &f{command} &7not found."
+  not-found-hint: "{prefix}&8Use &d/ac help &8for the list."
+  
+  # ─────────────── COMMAND DEFINITIONS ───────────────
+  # Each command has: usage, description, details (list), examples (list)
+  
+  commands:
+    help:
+      usage: "/ac help [comando]"
+      description: "&fMostra la lista comandi o il dettaglio di un comando."
+      details:
+        - "&7Nessun argomento: mostra tutti i comandi."
+        - "&7Con argomento: mostra i dettagli per quel comando."
+      examples:
+        - "/ac help"
+        - "/ac help freeze"
+    
+    alerts:
+      usage: "/ac alerts"
+      description: "&fAttiva/disattiva la ricezione degli avvisi."
+      details:
+        - "&7Abilitati: ricevi notifiche per ogni violazione."
+        - "&7Disabilitati: non riceverai notifiche."
+      examples:
+        - "/ac alerts"
+    
+    info:
+      usage: "/ac info <player>"
+      description: "&fMostra le violazioni di un giocatore."
+      details:
+        - "&7Mostra ogni check con il suo livello di violazione (VL)."
+        - "&7Include anche informazioni su ping e gamemode."
+      examples:
+        - "/ac info Steve"
+    
+    list:
+      usage: "/ac list"
+      description: "&fElenca i giocatori online con violazioni."
+      details:
+        - "&7Mostra i giocatori ordinati per VL totali."
+        - "&7Colori: &cRosso (>=10)&7, &eGiallo (>=5)&7, &7Grigio (<5)."
+      examples:
+        - "/ac list"
+    
+    top:
+      usage: "/ac top"
+      description: "&fMostra la top 10 dei giocatori con più violazioni."
+      details:
+        - "&7Utile per identificare rapidamente i cheater."
+      examples:
+        - "/ac top"
+    
+    freeze:
+      usage: "/ac freeze <player>"
+      description: "&fCongela un giocatore sospetto."
+      details:
+        - "&7Il giocatore non potrà muoversi, attaccare o usare comandi."
+        - "&7Se si disconnette, lo staff verrà avvisato."
+      examples:
+        - "/ac freeze Steve"
+    
+    unfreeze:
+      usage: "/ac unfreeze <player>"
+      description: "&fScongela un giocatore."
+      details:
+        - "&7Il giocatore potrà tornare a giocare normalmente."
+      examples:
+        - "/ac unfreeze Steve"
+    
+    spectate:
+      usage: "/ac spectate <player>"
+      description: "&fEntra in modalità spettatore su un giocatore."
+      details:
+        - "&7Entri in modalità spettatore invisibile."
+        - "&7Segui automaticamente il giocatore."
+        - "&7Posizione e gamemode vengono salvati e ripristinati."
+      examples:
+        - "/ac spectate Steve"
+        - "/ac spec Steve"
+    
+    unspectate:
+      usage: "/ac unspectate"
+      description: "&fEsci dalla modalità spettatore."
+      details:
+        - "&7Torni alla tua posizione e gamemode originali."
+      examples:
+        - "/ac unspectate"
+        - "/ac unspec"
+    
+    tp:
+      usage: "/ac tp <player>"
+      description: "&fTeletrasportati da un giocatore."
+      details:
+        - "&7Utile per raggiungere rapidamente un sospetto."
+      examples:
+        - "/ac tp Steve"
+        - "/ac goto Steve"
+    
+    broadcast:
+      usage: "/ac broadcast <messaggio>"
+      description: "&fInvia un messaggio allo staff online."
+      details:
+        - "&7Solo gli utenti con il permesso virgolaac.staff lo vedono."
+        - "&7Utile per comunicazioni interne."
+      examples:
+        - "/ac broadcast Controllate Steve"
+        - "/ac bc Sospetto allo spawn"
+    
+    panel:
+      usage: "/ac panel"
+      description: "&fApri il pannello di gestione grafico (GUI)."
+      details:
+        - "&7Visualizza e attiva/disattiva i check."
+        - "&7Mostra statistiche del server (TPS, RAM, etc)."
+      examples:
+        - "/ac panel"
+        - "/ac gui"
+    
+    reset:
+      usage: "/ac reset <player|all>"
+      description: "&fResetta le violazioni di un giocatore."
+      details:
+        - "&7Con un nome: resetta solo quel giocatore."
+        - "&7Con 'all': resetta tutti i giocatori online."
+      examples:
+        - "/ac reset Steve"
+        - "/ac reset all"
+    
+    verbose:
+      usage: "/ac verbose"
+      description: "&fAttiva/disattiva la modalità verbose/debug."
+      details:
+        - "&7Mostra informazioni aggiuntive sulle rilevazioni."
+        - "&7Utile per il debug e per testare i check."
+      examples:
+        - "/ac verbose"
+        - "/ac debug"
+    
+    kick:
+      usage: "/ac kick <player> [motivo]"
+      description: "&fEspelli un giocatore dal server."
+      details:
+        - "&7Il giocatore vedrà il motivo sullo schermo."
+        - "&7Lo staff riceverà una notifica."
+      examples:
+        - "/ac kick Steve"
+        - "/ac kick Steve Speed Hack"
+    
+    ban:
+      usage: "/ac ban <player> [motivo]"
+      description: "&fBanna permanentemente un giocatore."
+      details:
+        - "&7Usa il sistema di ban di default di Bukkit."
+        - "&7Lo staff riceverà una notifica."
+      examples:
+        - "/ac ban Steve"
+        - "/ac ban Steve Fly Hack"
+    
+    reload:
+      usage: "/ac reload"
+      description: "&fRicarica le configurazioni del plugin."
+      details:
+        - "&7Ricarica config.yml, checks.yml, messages.yml."
+        - "&7Non richiede un riavvio del server."
+      examples:
+        - "/ac reload"
+
+# ---------------------------------------------------------------
+#                       SETTINGS ITEM DESCRIPTIONS
+#  Descriptions displayed in the settings GUI for each parameter.
+#  Keys are: gui.detail.settings-item.descriptions.<CHECK>.<param>
+# ---------------------------------------------------------------
+gui:
+  detail:
+    settings-item:
+      descriptions:
+        SPEED:
+          base_walk_bps: "Base walking speed (blocks/sec). Increasing this value raises the allowed baseline movement speed — players can move faster before the check flags them. Decreasing makes the check stricter and may increase false positives for legitimate players."
+          min_bps: "Minimum considered bps for movement measurements. Raising will ignore very small movements; lowering makes the detector more sensitive to tiny motion."
+          threshold: "Detection threshold for accumulated speed buffer. Higher threshold reduces false positives but delays flagging; lower threshold makes the system stricter and may increase alerts."
+          weight_high: "High severity weight applied to strong speed violations. Increasing this increases the VL per violation; decreasing reduces punishment severity."
+          decay_ok: "How quickly the speed buffer decays when behavior is normal. Higher decay clears violations faster; lower decay keeps historical violations longer."
+
+        FLY:
+          air_weight: "Relative weight for air-fly evidence. Increasing makes air detections contribute more to the buffer; lowering reduces their influence."
+          air_threshold: "Threshold for air fly detection buffer. Raising requires stronger proof to flag; lowering is more sensitive."
+
+        JESUS:
+          min_flat_ticks: "Minimum ticks considered 'flat on water' before triggering detection. Increasing makes detector more patient; lowering detects faster but may false-trigger on brief contacts."
+          threshold: "Detection threshold for Jesus buffer. Higher = stricter to trigger; lower = more sensitive."
+
+        SCAFFOLD:
+          max_angle: "Maximum allowed angle for scaffold-like placement behavior. Increasing allows steeper placements without flags; decreasing tightens detection for straighter builds."
+          min_violations: "Number of violations required before an alert is issued. Increasing reduces noisy alerts; lowering makes detection quicker."
+
+        NOFALL:
+          min_fall_blocks: "Minimum fall distance (blocks) that should normally cause fall damage. Increasing raises the bar (fewer falls trigger damage expectations); decreasing makes the check consider smaller falls."
+          damage_grace_ms: "Grace period (ms) to wait for the damage event after landing. Increase to tolerate lag (avoids false positives), decrease to be stricter."
+
+        BADPACKETS:
+          threshold: "Buffer threshold for invalid packets. Higher = fewer reports (more tolerant); lower = more sensitive to malformed or unexpected packets."
+
+        KILLAURA:
+          sub_checks.reach.max_distance: "Maximum allowed attack reach (blocks). Increase to allow longer legitimate hits (creative/laggy); decrease to detect extended reach."
+          sub_checks.angle.max_angle: "Maximum angle difference allowed between look direction and target for a valid hit. Increasing allows wider aim; decreasing makes the check stricter (flags when not looking)."
+          sub_checks.noswing.max_delay_ms: "Maximum allowed ms between swing and hit. Increase to tolerate slower swings/lag; decrease to detect hits without proper swing timing."
+          sub_checks.gcd.sample_size: "Number of rotation samples used for GCD analysis. Increasing makes analysis more stable but slower; decreasing makes detection quicker but possibly noisier."
+          sub_checks.multiaura.max_targets: "Maximum different targets allowed within the time window. Increasing allows more simultaneous hits; decreasing detects multi-target aimbot behavior sooner."
+          sub_checks.pattern.min_variance: "Minimum rotational variance expected from a human. Increasing this requires more jitter (harder to flag); decreasing makes the detector sensitive to robotic consistency."
+    discord:
+      usage: "/ac discord <subcommand>"
+      description: "Manage Discord webhook integration."
+      details:
+        - "set <webhook>: save the webhook URL and enable Discord alerts (legacy single)"
+        - "add <webhook>: add a webhook to the global list"
+        - "remove <webhook>: remove a webhook from the global list"
+        - "list: show configured global webhooks"
+        - "setcheck <check> <webhook>: set a webhook for a specific check"
+        - "unsetcheck <check>: remove per-check webhook"
+        - "test: send a test alert to the configured webhook(s)"
+        - "disable: disable Discord alerts"
+      examples:
+        - "/ac discord add https://discord.com/api/webhooks/..."
+        - "/ac discord test"
+        - "/ac discord disable"
+
+# Discord messages & templates
+discord:
+  usage: |
+    {prefix}&7Discord webhook commands:
+    &f/ac discord set <webhook> &8- &7Set legacy webhook and enable
+    &f/ac discord add <webhook> &8- &7Add a webhook to the global list
+    &f/ac discord remove <webhook> &8- &7Remove a webhook from the global list
+    &f/ac discord list &8- &7List configured global webhooks
+    &f/ac discord setcheck <check> <webhook> &8- &7Set a webhook for a specific check
+    &f/ac discord unsetcheck <check> &8- &7Remove per-check webhook
+    &f/ac discord test &8- &7Send a test alert (uses nearest online player)
+    &f/ac discord disable &8- &7Disable Discord alerts
+  set-success: "{prefix}&aDiscord webhook saved and enabled."
+  disable-success: "{prefix}&aDiscord alerts disabled."
+  test-no-player: "{prefix}&cNo online player to use for test."
+  test-sent: "{prefix}&aTest alert sent to Discord."
+
+  # Format used when sending plain alerts to Discord. Placeholders: {player},{check},{vl},{info}
+  format: "**{player}** was detected by **{check}** (+{vl}) - {info}"
+
+  # Embed templates (title/description support placeholders; description used in embed body)
+  embed:
+    title: "{check} detected"
+    description: "{player} was flagged for {check} (+{vl}) {info}"
+
+# ---------------------------------------------------------------
+#                         GUI
+# ---------------------------------------------------------------
+gui:
+  item-enabled: "&a{check}"
+  item-disabled: "&c{check}"
+  lore-enabled:
+    - "&7State: &aON"
+    - "&7Click to disable"
+  lore-disabled:
+    - "&7State: &cOFF"
+    - "&7Click to enable"
+  panel:
+    title: "&d&lVirgolaAC &8- &fPannello"
+    check-item:
+      name-enabled: "&a&l{check}"
+      name-disabled: "&c&l{check}"
+      short-lore:
+        - "&e&l▶ &fClicca per maggiori informazioni"
+    status-item:
+      name: "&b&lStato Server"
+      tps: "&7TPS: {color}{tps}"
+      players: "&7Players: &f{online}&7/&f{max}"
+      active-checks: "&7Checks attivi: &a{active}&7/&f{total}"
+      memory: "&7RAM: {color}{used}MB&7/&f{max}MB"
+    glass-name: "&d "
+    wrap-length: 35
+    checks:
+      SCAFFOLD:
+        material: "SCAFFOLDING"
+        disabled-material: "GRAY_STAINED_GLASS"
+      FLY:
+        material: "ELYTRA"
+        disabled-material: "GRAY_STAINED_GLASS"
+      SPEED:
+        material: "SUGAR"
+        disabled-material: "GRAY_STAINED_GLASS"
+      JESUS:
+        material: "WET_SPONGE"
+        disabled-material: "GRAY_STAINED_GLASS"
+      NOFALL:
+        material: "FEATHER"
+        disabled-material: "GRAY_STAINED_GLASS"
+      BADPACKETS:
+        material: "PAPER"
+        disabled-material: "GRAY_STAINED_GLASS"
+      KILLAURA:
+        material: "IRON_SWORD"
+        disabled-material: "GRAY_STAINED_GLASS"
+  detail:
+    title: "&d&lVirgolaAC &8- &f{check}"
+    info-item:
+      name: "&d&l{check}"
+      lore:
+        - "&7&n────────────────────"
+        - "&eTipo: &f{type}"
+        - ""
+        - "{description}"
+        - ""
+        - "&7Stato: {state}"
+      separator: "&7──────────────────"
+      type: "&eTipo: &f{type}"
+      state: "&eStato: &f{state}"
+    extras-header: "&6&lDettagli:"
+    bullet: "&7• &f"
+    bullet-cont: "  &f"
+    settings-item:
+      param-name-format: "&6{param}"
+      value: "&7Value: &f{value}"
+      click-toggle: "&eClick to toggle"
+      left-right: "&eLeft click: +  &eRight click: -"
+      type: "&7Type: &f{type}"
+      no-permission: "&cNon hai il permesso per modificare le impostazioni."
+      prompt: "&eInserisci il nuovo valore per {param} in chat. Scrivi 'cancel' per annullare."
+      cancelled: "&cModifica annullata."
+      saved: "&aValore salvato."
+      invalid-number: "&cValore numerico non valido."
+      invalid-boolean: "&cValore booleano non valido. Usa true/false o on/off."
+  templates:
+    SCAFFOLD:
+      description: "&fAnalizza l'angolo e la velocità di piazzamento dei blocchi per rilevare &dScaffold &fe &dBridge."
+    FLY:
+      description: "&fMonitora il movimento verticale e le transizioni di stato (aria, terra) per rilevare il &dFly."
+    SPEED:
+      description: "&fConfronta la velocità del giocatore con i massimi consentiti per il suo stato per rilevare &dSpeed Hack."
+    JESUS:
+      description: "&fControlla le interazioni con i liquidi, impedendo ai giocatori di &dcamminare sull'acqua."
+    NOFALL:
+      description: "&fSi assicura che i giocatori ricevano danno da caduta dopo essere caduti da altezze significative, rilevando &dNoFall."
+    BADPACKETS:
+      description: "&fIntercetta e analizza i pacchetti inviati dal client, bloccando valori anomali come un &dPitch invalido."
+    KILLAURA:
+      description: "&fRileva una serie di hack da combattimento analizzando:\n&8- &dReach&7: Distanza d'attacco anomala\n&8- &dAngle&7: Attacchi con un angolo di mira impossibile\n&8- &dNoSwing&7: Attacchi senza l'animazione del braccio\n&8- &dGCD&7: Movimenti della visuale troppo perfetti e non umani\n&8- &dMultiAura&7: Attacchi a più bersagli simultaneamente"
+    toggle-item:
+      name-enabled: "&a&lDisattiva {check}"
+      name-disabled: "&c&lAttiva {check}"
+      lore:
+        - ""
+        - "&7Clicca per {action}"
+    settings-item:
+      name: "&e&lImpostazioni &8- &f{check}"
+      lore:
+        - ""
+        - "&7Visualizza o modifica le impostazioni (prossimamente)"
+    back-item:
+      name: "&c&lIndietro"
+      lore:
+        - ""
+        - "&7Torna al pannello principale"
+  roles:
+    admin:
+      permission: "virgolaac.admin"
+      material: "DIAMOND_BLOCK"
+    mod:
+      permission: "virgolaac.mod"
+      material: "EMERALD_BLOCK"
+    default:
+      material: "MAGENTA_STAINED_GLASS_PANE"
+  # (visual helpers moved into existing gui.panel/gui.detail sections)
