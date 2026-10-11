@@ -6,7 +6,6 @@ public enum CheckId {
     SPEED("Movement", "Detects speed hacks by comparing movement to maximum allowed speeds"),
     JESUS("Movement", "Detects water-walking hacks by checking liquid interactions"),
     NOFALL("Movement", "Detects NoFall hacks by monitoring fall damage"),
-    BADPACKETS("Packet", "Detects invalid pitch values that exceed normal limits"),
     KILLAURA("Combat", "Detects combat hacks: Reach (hit distance), Angle (aim direction), NoSwing (missing animation), GCD (rotation patterns), MultiAura (multiple targets), Pattern (robotic consistency)");
     
     private final String type;
