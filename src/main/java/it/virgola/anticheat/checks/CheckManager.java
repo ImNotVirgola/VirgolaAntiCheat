@@ -27,7 +27,6 @@ public class CheckManager {
         this.plugin = plugin;
 
         register(new ScaffoldCheck(configs, violations, lag));
-        register(new BadPacketsCheck(configs, violations));
         register(new FlyCheck(configs, violations, lag));
         register(new SpeedCheck(configs, violations, lag));
         register(new JesusCheck(configs, violations, lag));
