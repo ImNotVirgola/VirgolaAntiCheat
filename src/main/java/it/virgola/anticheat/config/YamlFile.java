@@ -57,7 +57,11 @@ public final class YamlFile {
     public void set(String path, String value) { if (path != null) cfg.set(path, value); }
     public void set(String path, Object value) { if (path != null) cfg.set(path, value); }
 
-    public boolean getBoolean(String path, boolean def) { return cfg.getBoolean(path, def); }
+    public boolean getBoolean(String path, boolean def) {
+        // get(path) resolves packaged defaults; getBoolean(path, def) would bypass them.
+        Object value = cfg.get(path);
+        return value instanceof Boolean bool ? bool : def;
+    }
     public String getString(String path, String def) {
         String value = cfg.getString(path);
         return value == null ? def : value;
@@ -65,7 +69,11 @@ public final class YamlFile {
     public List<String> getStringList(String path) {
         return path == null ? Collections.emptyList() : cfg.getStringList(path);
     }
-    public int getInt(String path, int def) { return cfg.getInt(path, def); }
+    public int getInt(String path, int def) {
+        // Match the same precedence as booleans and other numeric settings.
+        Object value = cfg.get(path);
+        return value instanceof Number number ? number.intValue() : def;
+    }
     public long getLong(String path, long def) {
         Object value = cfg.get(path);
         if (value instanceof Number number) return number.longValue();
