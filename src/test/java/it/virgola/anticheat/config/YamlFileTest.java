@@ -78,4 +78,28 @@ class YamlFileTest {
         assertThrows(IllegalStateException.class, () -> new YamlFile(file.toFile()));
         assertEquals(invalid, Files.readString(file));
     }
+
+    @Test
+    void missingNumericAndBooleanSettingsUseBundledDefaults() throws Exception {
+        Path file = directory.resolve("checks.yml");
+        Files.writeString(file, "checks:\n  SPEED:\n    enabled: false\n");
+
+        YamlConfiguration bundled = new YamlConfiguration();
+        bundled.set("checks.SPEED.enabled", true);
+        bundled.set("checks.FLY.enabled", true);
+        bundled.set("checks.FLY.params.stable_air_min", 6);
+        bundled.set("checks.FLY.params.air_threshold", 4.5);
+
+        YamlFile yaml = new YamlFile(file.toFile(), bundled);
+
+        // The administrator's override wins.
+        assertFalse(yaml.getBoolean("checks.SPEED.enabled", true));
+        // Defaults must be used even when the caller's fallback is different.
+        assertTrue(yaml.getBoolean("checks.FLY.enabled", false));
+        assertEquals(6, yaml.getInt("checks.FLY.params.stable_air_min", -1));
+        assertEquals(4.5, yaml.getDouble("checks.FLY.params.air_threshold", -1), 0.000001);
+        // An unknown setting must still use the caller's fallback.
+        assertEquals(8, yaml.getInt("checks.UNKNOWN.limit", 8));
+        assertFalse(yaml.getBoolean("checks.UNKNOWN.enabled", false));
+    }
 }
