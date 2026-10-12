@@ -1,5 +1,6 @@
-# VirgolaAntiCheat - Checks Configuration
-# All checks use buffer-based detection with lag compensation
+# VirgolaAntiCheat - Controlli anticheat
+# Le impostazioni predefinite sono consigliate per l'uso normale.
+# Modifica i valori avanzati solo se necessario.
 
 checks:
   # ============================================
@@ -149,17 +150,6 @@ checks:
       dripstone_slack: 0.15
       # Enable debug logs for NOFALL (set true to print diagnostic logs)
       debug_logs: false
-
-  # ============================================
-  # BADPACKETS - Invalid Packet Detection
-  # ============================================
-  BADPACKETS:
-    enabled: true
-    params:
-      threshold: 2.0
-      weight: 1.0
-      alert_cooldown_ms: 1000
-      post_flag_reduce: 1.0
 
   # ============================================
   # KILLAURA - Combat Hack Detection

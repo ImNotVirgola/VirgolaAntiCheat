@@ -418,8 +418,6 @@ gui:
           min_fall_blocks: "Minimum fall distance (blocks) that should normally cause fall damage. Increasing raises the bar (fewer falls trigger damage expectations); decreasing makes the check consider smaller falls."
           damage_grace_ms: "Grace period (ms) to wait for the damage event after landing. Increase to tolerate lag (avoids false positives), decrease to be stricter."
 
-        BADPACKETS:
-          threshold: "Buffer threshold for invalid packets. Higher = fewer reports (more tolerant); lower = more sensitive to malformed or unexpected packets."
 
         KILLAURA:
           sub_checks.reach.max_distance: "Maximum allowed attack reach (blocks). Increase to allow longer legitimate hits (creative/laggy); decrease to detect extended reach."
@@ -513,9 +511,6 @@ gui:
       NOFALL:
         material: "FEATHER"
         disabled-material: "GRAY_STAINED_GLASS"
-      BADPACKETS:
-        material: "PAPER"
-        disabled-material: "GRAY_STAINED_GLASS"
       KILLAURA:
         material: "IRON_SWORD"
         disabled-material: "GRAY_STAINED_GLASS"
@@ -559,8 +554,6 @@ gui:
       description: "&fControlla le interazioni con i liquidi, impedendo ai giocatori di &dcamminare sull'acqua."
     NOFALL:
       description: "&fSi assicura che i giocatori ricevano danno da caduta dopo essere caduti da altezze significative, rilevando &dNoFall."
-    BADPACKETS:
-      description: "&fIntercetta e analizza i pacchetti inviati dal client, bloccando valori anomali come un &dPitch invalido."
     KILLAURA:
       description: "&fRileva una serie di hack da combattimento analizzando:\n&8- &dReach&7: Distanza d'attacco anomala\n&8- &dAngle&7: Attacchi con un angolo di mira impossibile\n&8- &dNoSwing&7: Attacchi senza l'animazione del braccio\n&8- &dGCD&7: Movimenti della visuale troppo perfetti e non umani\n&8- &dMultiAura&7: Attacchi a più bersagli simultaneamente"
     toggle-item:
